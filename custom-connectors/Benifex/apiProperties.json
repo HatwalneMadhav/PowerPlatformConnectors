@@ -5,90 +5,22 @@
         "type": "oauthSetting",
         "oAuthSettings": {
           "identityProvider": "oauth2generic",
-          "clientId": "dddd-4444-44c2-b9fa-sddd43b29da7c",
-          "scopes": [
-            "https://www.Test API.com//user_impersonation",
-            "offline_access"
-          ],
-          "redirectMode": "GlobalPerConnector",
-          "redirectUrl": "https://global.consent.azure-apim.net/redirect/-20succestestactor-20connector-20with-20oauth--4248fbb534490f85",
           "properties": {
-            "ItestirstParty": "False",
+            "ItestirstParty": "true",
             "IsOnbehalfofLoginSupported": false
           },
           "customParameters": {
-            "authorizationUrlTemplate": {
-              "value": "https://login.microsoftonline.com/tenatId/oauth2/v2.0/authorize"
-            },
-            "authorizationUrlQueryStringTemplate": {
-              "value": "?client_id={ClientId}&response_type=code&redirect_uri={RedirectUrl}&state={State}&scope={Scopes}"
-            },
             "tokenUrlTemplate": {
-              "value": "https://login.microsoftonline.com/tenatId/oauth2/v2.0/token"
+              "value": "https://hub.onehub.global/oauth2/default/v1/token"
             },
             "tokenBodyTemplate": {
-              "value": "client_id={ClientId}&scope={Scopes}&code={Code}&redirect_uri={RedirectUrl}&grant_type=authorization_code&client_secret={ClientSecret}&requested_token_type=urn:ietf:params:oauth:token-type:saml2"
-            },
-            "refreshUrlTemplate": {
-              "value": "https://login.microsoftonline.com/tenatId/oauth2/v2.0/token"
-            },
-            "refreshBodyTemplate": {
-              "value": "client_id={ClientId}&scope={Scopes}&refresh_token={RefreshToken}&redirect_uri={RedirectUrl}&grant_type=refresh_token&client_secret={ClientSecret}&requested_token_type=urn:ietf:params:oauth:token-type:saml2"
-            },
-            "scopeListDelimiter": {
-              "value": " "
+              "value": "grant_type=client_credentials&client_id={clientid}&client_secret={clientSecret}"
             }
-          }
-        }
-      },
-      "test_client_id": {
-        "type": "string",
-        "uiDefinition": {
-          "displayName": "Client ID",
-          "description": "Client ID of the  Test API application",
-          "tooltip": "Client ID of the  Test API application",
-          "constraints": {
-            "required": true
-          }
-        }
-      },
-      "test_company_id": {
-        "type": "string",
-        "uiDefinition": {
-          "displayName": "Company ID",
-          "description": "Company ID of the  Test API application",
-          "tooltip": "Company ID of the  Test API application",
-          "constraints": {
-            "required": true
           }
         }
       }
     },
     "iconBrandColor": "#007ee5",
-    "scriptOperations": [],
-    "capabilities": [],
-    "policyTemplateInstances": [
-      {
-        "templateId": "setheader",
-        "title": "SetTest APIClientId",
-        "parameters": {
-          "x-ms-apimTemplateParameter.name": "test_client_id",
-          "x-ms-apimTemplateParameter.value": "@connectionParameters('test_client_id')",
-          "x-ms-apimTemplateParameter.existsAction": "override",
-          "x-ms-apimTemplate-policySection": "Request"
-        }
-      },
-      {
-        "templateId": "setheader",
-        "title": "SetTest APICompanyId",
-        "parameters": {
-          "x-ms-apimTemplateParameter.name": "test_company_id",
-          "x-ms-apimTemplateParameter.value": "@connectionParameters('test_company_id')",
-          "x-ms-apimTemplateParameter.existsAction": "override",
-          "x-ms-apimTemplate-policySection": "Request"
-        }
-      }
-    ],
-    "publisher": "Test"
+    "publisher": "Microsoft"
   }
 }

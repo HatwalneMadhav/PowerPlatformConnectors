@@ -1,0 +1,458 @@
+{
+  "name": "Benefex-new",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Create user",
+      "filename": "Create user.bru",
+      "seq": 1,
+      "request": {
+        "url": "https://connect-sandbox.onehub.global/users",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "accept",
+            "value": "application/json",
+            "enabled": true
+          },
+          {
+            "name": "content-type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"gender\": \"Male\",\n  \"maritalStatus\": \"Single\",\n  \"employment\": {\n    \"contractDetails\": {\n      \"type\": \"Full Time\"\n    },\n    \"salaryDetails\": {\n      \"payGroup\": \"0220 \",\n      \"salary\": 100000,\n      \"salaryEffectiveDate\": \"2024-01-01\"\n    },\n    \"employeeId\": \"PKJASShgSSD-8972\",\n    \"startDate\": \"2024-01-01\",\n    \"jobTitle\": \"Engineer\",\n    \"grade\": \"A\",\n    \"department\": \"Backend Engineer\"\n  },\n  \"forename\": \"test name\",\n  \"surname\": \"test surname\",\n  \"dateOfBirth\": \"1991-11-11\",\n  \"emailAddress\": \"a@b.com\"\n}\n",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJraWQiOiJUa1dNX0k3Q3V4dHd3OFFkekdMa0oyemptUjVvUFVUdmJYNXExNlRPcWZnIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULktRUEpJNnAtOWxRMFNSSkd5S0MwSXp3eTFWWmdWSnRHOXBRZXhzOW1tRUEiLCJpc3MiOiJodHRwczovL2h1Yi5vbmVodWIuZ2xvYmFsL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTc0NDE5ODY0NSwiZXhwIjoxNzQ0MjAyMjQ1LCJjaWQiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInNjcCI6WyJhcHBsaWNhdGlvbiJdLCJzdWIiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInJvbGVzIjpbInVzZXJfZGF0YSJdLCJzYW5kYm94IjoidHJ1ZSIsInRlbmFudCI6Im1pY3Jvc29mdCJ9.Ft6XC59jgnYfvdKBvV5jZ2ea5lZ1oVvs5XuO9AfeOe-wGfEBz70F7-lrXtV2oyXfsvBzslDpL5DdHJdOrddpPsrXZ7ACcf771rx9WgXWnrgsDQpcMt8tKOh-bVq_vW01rvHiV7Ze4Aj5Jaz21gbQUsGjDtB9gUeaF49vYF-vMuTa15HAv9fZLBhuH-WVmlfmr2j69QI2van8pIkDQuCaMf8QRjoFL8buF0cMBlOdo4FaqdB7EPEW0aYthgwf7ahmd9_tgWGOwLDPcZDs6f9ILvMMWYXchpCXnf_2jGeHfK3jgLxMmaGZOdFioIJOUxO6lKdm8U8tJ8K6vasY84lEHA"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete Existing user",
+      "filename": "Delete Existing user.bru",
+      "seq": 5,
+      "request": {
+        "url": "https://connect-sandbox.onehub.global/users/:user-id",
+        "method": "DELETE",
+        "headers": [
+          {
+            "name": "accept",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [
+          {
+            "name": "user-id",
+            "value": "bb65d42f-d454-4156-ad69-3e0e42223e57",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJraWQiOiJUa1dNX0k3Q3V4dHd3OFFkekdMa0oyemptUjVvUFVUdmJYNXExNlRPcWZnIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULlJWeDdYbDNxMEhiODF2VGF0dVA1a0NXdHN6T2V1cU91QkhzZmdSaVkwdWciLCJpc3MiOiJodHRwczovL2h1Yi5vbmVodWIuZ2xvYmFsL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTc0NDE5ODU4OSwiZXhwIjoxNzQ0MjAyMTg5LCJjaWQiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInNjcCI6WyJhcHBsaWNhdGlvbiJdLCJzdWIiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInJvbGVzIjpbInVzZXJfZGF0YSJdLCJzYW5kYm94IjoidHJ1ZSIsInRlbmFudCI6Im1pY3Jvc29mdCJ9.XVZgeiQMYqBVnnRwHYdOhlaNPX1Fw15IBcaaHpWnvRJwbS733HOJvWfxJvYf1jF_02ZIVP5juzPhbnUmsbRnQab41De05iuO1rALohqnstFiH0GXLgxzShUQz9Qi8ogKALhaRKy81cGTxdRsrvs2ykHbIISxoX1CNon9ScFIKuFaeypIIEOvnwM1rRxmHDSJcrF9sEPeHXqOPnigyX5KF9Axri2ifPqHqQgbBNwzV32PIcJmXFr5nP1SwZarcCuxUk9jkRijq4SNrLL5X3_ipjTi6jl2veA1_cD0DNOODvcck53tyX3hcZUM8wZ61voXX1eH4QQklAO71Vph6-Qvxg"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get detailed available and eligible-to-add benefits of user.",
+      "filename": "Get detailed available and eligible-to-add benefits of user.bru",
+      "seq": 7,
+      "request": {
+        "url": "https://connect-sandbox.onehub.global/v2/users/:user-id/benefits/details",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "accept",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [
+          {
+            "name": "user-id",
+            "value": "bb65d42f-d454-4156-ad69-3e0e42223e57",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJraWQiOiJUa1dNX0k3Q3V4dHd3OFFkekdMa0oyemptUjVvUFVUdmJYNXExNlRPcWZnIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULl9YMlhsRHZwS3RkQ1l5LVh0TFlPM0xfZlA5MWZVU3h6aTlEbkJPWlZSaGMiLCJpc3MiOiJodHRwczovL2h1Yi5vbmVodWIuZ2xvYmFsL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTc0NDE5ODQ4NCwiZXhwIjoxNzQ0MjAyMDg0LCJjaWQiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInNjcCI6WyJhcHBsaWNhdGlvbiJdLCJzdWIiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInJvbGVzIjpbInVzZXJfZGF0YSJdLCJzYW5kYm94IjoidHJ1ZSIsInRlbmFudCI6Im1pY3Jvc29mdCJ9.Rrw6XnFaRpqJf66ozeQXAtD2Vz60Pxi_dCO51YXGeFYfRolJLR0jzqj2NEzZag91zEkBj_nrvffGRyHfpYPj8kNouLjXR2DWSfNC3QgYvFHZ84jE3X8OCS31-NDKZ-v71-8TBOOdYcEdXdZp2GXCmK-CdK1Dg8es-GaN72PTYVZY2tmzdnk8TrzaQr3JFcwFXv4MsehKBtajvrujhEX0CoP2Bp46bG9meIVrFsAUTCqUlpjpC5KNwAdd65T-yBYDqoGps_9lQzm9AB2aLfOfSla3SKjOi7Wb2S39Qfy3iHVGp0HhwRZOChNsA7hQ-0d1wiIagH0Prsce6RXIMOIOTg"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get Existing user",
+      "filename": "Get Existing user.bru",
+      "seq": 4,
+      "request": {
+        "url": "https://connect-sandbox.onehub.global/users/:user-id",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "accept",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [
+          {
+            "name": "user-id",
+            "value": "1213620a-292c-430c-a06a-7215fff279a3",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJraWQiOiJUa1dNX0k3Q3V4dHd3OFFkekdMa0oyemptUjVvUFVUdmJYNXExNlRPcWZnIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULktRUEpJNnAtOWxRMFNSSkd5S0MwSXp3eTFWWmdWSnRHOXBRZXhzOW1tRUEiLCJpc3MiOiJodHRwczovL2h1Yi5vbmVodWIuZ2xvYmFsL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTc0NDE5ODY0NSwiZXhwIjoxNzQ0MjAyMjQ1LCJjaWQiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInNjcCI6WyJhcHBsaWNhdGlvbiJdLCJzdWIiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInJvbGVzIjpbInVzZXJfZGF0YSJdLCJzYW5kYm94IjoidHJ1ZSIsInRlbmFudCI6Im1pY3Jvc29mdCJ9.Ft6XC59jgnYfvdKBvV5jZ2ea5lZ1oVvs5XuO9AfeOe-wGfEBz70F7-lrXtV2oyXfsvBzslDpL5DdHJdOrddpPsrXZ7ACcf771rx9WgXWnrgsDQpcMt8tKOh-bVq_vW01rvHiV7Ze4Aj5Jaz21gbQUsGjDtB9gUeaF49vYF-vMuTa15HAv9fZLBhuH-WVmlfmr2j69QI2van8pIkDQuCaMf8QRjoFL8buF0cMBlOdo4FaqdB7EPEW0aYthgwf7ahmd9_tgWGOwLDPcZDs6f9ILvMMWYXchpCXnf_2jGeHfK3jgLxMmaGZOdFioIJOUxO6lKdm8U8tJ8K6vasY84lEHA"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get Existing Users",
+      "filename": "Get Existing Users.bru",
+      "seq": 2,
+      "request": {
+        "url": "https://connect-sandbox.onehub.global/users?employeeIds=PKJASShgSSD-8972&page=0&size=100",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "accept",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [
+          {
+            "name": "employeeIds",
+            "value": "PKJASShgSSD-8972",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "page",
+            "value": "0",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "size",
+            "value": "100",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJraWQiOiJUa1dNX0k3Q3V4dHd3OFFkekdMa0oyemptUjVvUFVUdmJYNXExNlRPcWZnIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULktRUEpJNnAtOWxRMFNSSkd5S0MwSXp3eTFWWmdWSnRHOXBRZXhzOW1tRUEiLCJpc3MiOiJodHRwczovL2h1Yi5vbmVodWIuZ2xvYmFsL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTc0NDE5ODY0NSwiZXhwIjoxNzQ0MjAyMjQ1LCJjaWQiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInNjcCI6WyJhcHBsaWNhdGlvbiJdLCJzdWIiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInJvbGVzIjpbInVzZXJfZGF0YSJdLCJzYW5kYm94IjoidHJ1ZSIsInRlbmFudCI6Im1pY3Jvc29mdCJ9.Ft6XC59jgnYfvdKBvV5jZ2ea5lZ1oVvs5XuO9AfeOe-wGfEBz70F7-lrXtV2oyXfsvBzslDpL5DdHJdOrddpPsrXZ7ACcf771rx9WgXWnrgsDQpcMt8tKOh-bVq_vW01rvHiV7Ze4Aj5Jaz21gbQUsGjDtB9gUeaF49vYF-vMuTa15HAv9fZLBhuH-WVmlfmr2j69QI2van8pIkDQuCaMf8QRjoFL8buF0cMBlOdo4FaqdB7EPEW0aYthgwf7ahmd9_tgWGOwLDPcZDs6f9ILvMMWYXchpCXnf_2jGeHfK3jgLxMmaGZOdFioIJOUxO6lKdm8U8tJ8K6vasY84lEHA"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get summarized available and eligible-to-add benefits of user.",
+      "filename": "Get summarized available and eligible-to-add benefits of user.bru",
+      "seq": 6,
+      "request": {
+        "url": "https://connect-sandbox.onehub.global/v2/users/:user-id/benefits/summary",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "accept",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [
+          {
+            "name": "user-id",
+            "value": "bb65d42f-d454-4156-ad69-3e0e42223e57",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJraWQiOiJUa1dNX0k3Q3V4dHd3OFFkekdMa0oyemptUjVvUFVUdmJYNXExNlRPcWZnIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULndXV0liM3loLXVCaHUtdUhwVkZUeXJQV1RObnJaemxKbzhOd2REWHQ5RHMiLCJpc3MiOiJodHRwczovL2h1Yi5vbmVodWIuZ2xvYmFsL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTc0NDE5NzYzNywiZXhwIjoxNzQ0MjAxMjM3LCJjaWQiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInNjcCI6WyJhcHBsaWNhdGlvbiJdLCJzdWIiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInJvbGVzIjpbInVzZXJfZGF0YSJdLCJzYW5kYm94IjoidHJ1ZSIsInRlbmFudCI6Im1pY3Jvc29mdCJ9.M9DnV8TuSVDx8lyQHICovKOzOafvPFl-oG6a2iN0n8yxS-ijKkMm60zMl-ol9M6NzTqD9_3hmWNIRhjhgoYFiu9H0wbiV0m7sUhbiroZvTrAAPhwQknYVC7z4M5ymUPEHv7kg6OTGBCI8G30zef-u9tvHgttxAsqnczLf1zI16WBiAg3w-hdBLJNg-Y3k64ilbLKa7X6UHSz0ZHcYR0QqdJg_z2Qzk_RrJ7RzQdn__eoa6IXesWRRhtiKq55og92jkJnVPOuvYyspPrrGJ4iOgX7tYy1crFD1FK8dWr4sz5NbFEvJ7XUVFwGio440-umNTHYlkFTbqWM93qvMrngXg"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get user benefit information.",
+      "filename": "Get user benefit information.bru",
+      "seq": 8,
+      "request": {
+        "url": "https://connect-sandbox.onehub.global/v2/users/:user-id/benefits/:benefit-key/summary",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "accept",
+            "value": "application/json",
+            "enabled": true
+          },
+          {
+            "name": "user-id",
+            "value": "bb65d42f-d454-4156-ad69-3e0e42223e57",
+            "enabled": true
+          },
+          {
+            "name": "benefit-key",
+            "value": "_LifeInsurance",
+            "enabled": true
+          }
+        ],
+        "params": [
+          {
+            "name": "benefit-key",
+            "value": "_LifeInsurance",
+            "type": "path",
+            "enabled": true
+          },
+          {
+            "name": "user-id",
+            "value": "bb65d42f-d454-4156-ad69-3e0e42223e57",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJraWQiOiJUa1dNX0k3Q3V4dHd3OFFkekdMa0oyemptUjVvUFVUdmJYNXExNlRPcWZnIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULmNBdzJNVl9MYm0wakxBdkwwRkJ3Z2dMejk0VFZQeFhYcVdIZURRY1I5MjAiLCJpc3MiOiJodHRwczovL2h1Yi5vbmVodWIuZ2xvYmFsL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTc0NDE5Nzk3OCwiZXhwIjoxNzQ0MjAxNTc4LCJjaWQiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInNjcCI6WyJhcHBsaWNhdGlvbiJdLCJzdWIiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInJvbGVzIjpbInVzZXJfZGF0YSJdLCJzYW5kYm94IjoidHJ1ZSIsInRlbmFudCI6Im1pY3Jvc29mdCJ9.PIElZ4E5QM5lZbar2SfAk9U48RwlAaHiIFbgVJUgvg1oRE57WqVVBbim0Va976ar16g9TurmceinP4fqb1jXOa7WtHEpYF1gKGB7vbUbkutp1x6X9_n89B7RD_Lde1gLvNw_tYU6u-EdiasC57bVyCnOzhAteGget-PodhbMdbTuOTX_XTzeJBAhfPQ-ddXVgWBrmUiL3POU7cqU1O_PdjzMWM3FSPMK_AHuAqbPdKWyBvBRzNGMlPk9Chi-wKDpuBUFIyWVaYqra98bySGdDhYdXfeIGIoY_M7bu_mfUfw8i8I5YIeRmh39_rLGEj6HCHviFtri7Y0eM9eSv9knuQ"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "token",
+      "filename": "token.bru",
+      "seq": 9,
+      "request": {
+        "url": "https://hub.onehub.global/oauth2/default/v1/token?client_id=0oafpa1ab5F5y0zw70i7&client_secret=boxTdwY0JoQXProI-qAnjw-BTXb_LRODaKSgKHwJ-jKkeYLonAuU8WLq4ngCEOjT&grant_type=client_credentials",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "enabled": true
+          }
+        ],
+        "params": [
+          {
+            "name": "client_id",
+            "value": "0oafpa1ab5F5y0zw70i7",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "client_secret",
+            "value": "boxTdwY0JoQXProI-qAnjw-BTXb_LRODaKSgKHwJ-jKkeYLonAuU8WLq4ngCEOjT",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "grant_type",
+            "value": "client_credentials",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "none"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "update existing user",
+      "filename": "update existing user.bru",
+      "seq": 3,
+      "request": {
+        "url": "https://connect-sandbox.onehub.global/users/:user-id",
+        "method": "PATCH",
+        "headers": [
+          {
+            "name": "accept",
+            "value": "application/json",
+            "enabled": true
+          },
+          {
+            "name": "content-type",
+            "value": "application/json",
+            "enabled": true
+          }
+        ],
+        "params": [
+          {
+            "name": "user-id",
+            "value": "1213620a-292c-430c-a06a-7215fff279a3",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "[\n{\n    \"op\": \"replace\",\n    \"value\": \"Married\",\n    \"path\": \"/maritalStatus\"\n}\n]\n",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJraWQiOiJUa1dNX0k3Q3V4dHd3OFFkekdMa0oyemptUjVvUFVUdmJYNXExNlRPcWZnIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULlNkRGFyQ2Z6TjdWdkZDYjdrZ1plNVdOODR0aEd5NjVESHJFbHNjdGdKbTAiLCJpc3MiOiJodHRwczovL2h1Yi5vbmVodWIuZ2xvYmFsL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiYXBpOi8vZGVmYXVsdCIsImlhdCI6MTc0NDE5OTIxNiwiZXhwIjoxNzQ0MjAyODE2LCJjaWQiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInNjcCI6WyJhcHBsaWNhdGlvbiJdLCJzdWIiOiIwb2FmcGExYWI1RjV5MHp3NzBpNyIsInJvbGVzIjpbInVzZXJfZGF0YSJdLCJzYW5kYm94IjoidHJ1ZSIsInRlbmFudCI6Im1pY3Jvc29mdCJ9.JuXJ_1sOTwIpdrg21FR_rKtksJXGKixXwRwmHRb28DnMMjgwigrhDPY-lc7y7K4Xwy01mWx5o4z4E7v-1SGYUgLGiKkEOarRzUdxyHwDmZnqKXmOJVRmYihL-x1YE4c9Frgc2xVQiZYtLYudhjE7kNKp7274fY-pNO4R1cZu0hFlulMprqiGnHESPKxDMNLQIAtt7HUCXkBoqxFVJE9LU2_0NASp92LVC3ehDVt3rUU4xmm6s0ACJ8_SpMlHRt9LLyNTwq0caRWU8hGWTHpp-ioanNxUrlXyqlWGkqZeT7vUjAy3VSU6JG2ewC9OvVdRUl_1YbmrYd4RUmt_23oghQ"
+          }
+        }
+      }
+    },
+    {
+      "type": "folder",
+      "name": "bruno",
+      "filename": "bruno",
+      "root": {
+        "meta": {
+          "name": "bruno"
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "root": {
+    "request": {
+      "auth": {
+        "mode": "none"
+      }
+    },
+    "meta": {
+      "name": "Benefex-new"
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "Benefex-new",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.010191917419433594,
+    "filesCount": 11
+  }
+}

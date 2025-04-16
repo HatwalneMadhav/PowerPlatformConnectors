@@ -11,16 +11,16 @@
           },
           "customParameters": {
             "tokenUrlTemplate": {
-              "value": "https://hub.onehub.global/oauth2/default/v1/token"
+              "value": "https://apiv2.eightfold-wu.ai/oauth/v1/authenticate"
             },
             "tokenBodyTemplate": {
-              "value": "grant_type=client_credentials&client_id={clientid}&client_secret={clientSecret}"
+              "value": "grant_type=password&username={userName}&password={password}"
             }
           }
         }
       }
     },
-    "iconBrandColor": "#007ee5",
+    "iconBrandColor": "#008000",
     "publisher": "Microsoft"
   }
 }

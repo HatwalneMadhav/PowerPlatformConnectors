@@ -6,7 +6,7 @@
         "oAuthSettings": {
           "identityProvider": "oauth2generic",
           "properties": {
-            "ItestirstParty": "true",
+            "ItestFirstParty": "true",
             "IsOnbehalfofLoginSupported": false
           },
           "customParameters": {

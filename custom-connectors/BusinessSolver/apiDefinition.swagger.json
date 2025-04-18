@@ -453,8 +453,7 @@
           }
         }
       }
-    },
-    "/benefits/rest/token": {}
+    }
   },
   "definitions": {},
   "parameters": {},

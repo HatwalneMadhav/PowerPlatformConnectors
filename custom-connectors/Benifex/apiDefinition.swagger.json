@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "Benifex",
-    "description": "Benifex Custom Connector for testing."
+    "description": "Benifex Custom Connector for Employee Self Service"
   },
   "host": "connect-sandbox.onehub.global",
   "basePath": "/",
@@ -1717,8 +1717,7 @@
           }
         }
       }
-    },
-    "/oauth2/default/v1/token": {}
+    }
   },
   "definitions": {},
   "parameters": {},

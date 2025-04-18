@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Eightfold collection Copy",
+    "title": "Eightfold",
     "description": "Eightfold custom connector for testing the endpoints"
   },
   "host": "apiv2.eightfold-wu.ai",
@@ -58799,56 +58799,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/oauth/v1/authenticate": {
-      "post": {
-        "summary": "Access Token",
-        "description": "Access Token",
-        "operationId": "AccessToken",
-        "parameters": [
-          {
-            "name": "content-type",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "default": "application/json",
-            "description": "content-type"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "grantType": {
-                  "type": "string",
-                  "description": "grantType"
-                },
-                "username": {
-                  "type": "string",
-                  "description": "username"
-                },
-                "password": {
-                  "type": "string",
-                  "description": "password"
-                }
-              },
-              "default": {
-                "grantType": "password",
-                "username": "demo@microsoft-tm2-dev-sandbox.com",
-                "password": "agtjyyznowqwjcbclmunmzuwyuyhjpmr"
-              }
-            },
-            "required": true
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "default",
-            "schema": {}
           }
         }
       }

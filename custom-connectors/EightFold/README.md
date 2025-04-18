@@ -4,7 +4,7 @@ Eightfold is a talent intelligence platform used by companies for recruiting, ta
 ## Publisher: HR Copilot
 
 ## Prerequisites
-> To access the Benifex connector you need username and password.
+> To access the Benifex connector you need username and password. More documentation can be found here https://apidocs.eightfold.ai/docs/oauth-configuration
 
 ## Supported Operations
 

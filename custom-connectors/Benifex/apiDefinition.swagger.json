@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Benifex",
-    "description": "Benifex Custom Connector for testing."
+    "title": "Benefex-new",
+    "description": "Benefex Custom Connector for testing."
   },
   "host": "connect-sandbox.onehub.global",
   "basePath": "/",
@@ -18,26 +18,36 @@
     "/users": {
       "get": {
         "summary": "Get Existing Users",
-        "description": "Get Existing Users",
+        "description": "Get created users at Benifex platform by employee IDs with pagination support",
         "operationId": "GetExistingUsers",
         "parameters": [
           {
             "name": "employeeIds",
             "in": "query",
             "type": "string",
-            "required": true
+            "required": true,
+            "x-ms-summary": "Employee IDs to retrieve",
+            "description": "Unique employee identifiers used to filter the users being fetched from the Benifex platform"
           },
           {
             "name": "page",
             "in": "query",
-            "type": "string",
-            "required": true
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "x-ms-visibility": "internal",
+            "x-ms-summary": "pagination page number",
+            "description": "Indicates the page number of the data to retrieve"
           },
           {
             "name": "size",
             "in": "query",
-            "type": "string",
-            "required": true
+            "type": "integer",
+            "required": true,
+            "default": 20,
+            "x-ms-visibility": "internal",
+            "x-ms-summary": "Number of records per page",
+            "description": "Specifies the number of user records to return per page"
           },
           {
             "name": "accept",
@@ -45,7 +55,9 @@
             "required": true,
             "type": "string",
             "default": "application/json",
-            "description": "accept"
+            "description": "Defines the media type expected in the response, usually set to application/json to receive JSON-formatted data",
+            "x-ms-visibility": "internal",
+            "x-ms-summary": "Response format"
           }
         ],
         "responses": {
@@ -121,6 +133,14 @@
                         "type": "string",
                         "description": "jobTitle"
                       },
+                      "location": {
+                        "type": "string",
+                        "description": "location"
+                      },
+                      "countryOfWork": {
+                        "type": "string",
+                        "description": "countryOfWork"
+                      },
                       "dateOfBirth": {
                         "type": "string",
                         "description": "dateOfBirth"
@@ -128,6 +148,10 @@
                       "startDate": {
                         "type": "string",
                         "description": "startDate"
+                      },
+                      "businessUnit": {
+                        "type": "string",
+                        "description": "businessUnit"
                       },
                       "gender": {
                         "type": "string",
@@ -143,12 +167,142 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
           }
         }
       },
       "post": {
-        "summary": "Create user",
-        "description": "Create user",
+        "summary": "CreateNewUser",
+        "description": "Create a new user on the Benifex platform",
         "operationId": "CreateUser",
         "parameters": [
           {
@@ -157,7 +311,8 @@
             "required": true,
             "type": "string",
             "default": "application/json",
-            "description": "accept"
+            "description": "Defines the media type expected in the response, usually set to application/json to receive JSON-formatted data",
+            "x-ms-summary": "Response format"
           },
           {
             "name": "content-type",
@@ -165,7 +320,8 @@
             "required": true,
             "type": "string",
             "default": "application/json",
-            "description": "content-type"
+            "description": "Indicates the media type of the body being sent in the request.",
+            "x-ms-summary": "Request payload format"
           },
           {
             "name": "body",
@@ -281,7 +437,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "default",
             "schema": {
               "type": "object",
@@ -331,10 +487,6 @@
                         "line3": {
                           "type": "string",
                           "description": "line3"
-                        },
-                        "line4": {
-                          "type": "string",
-                          "description": "line4"
                         },
                         "line5": {
                           "type": "string",
@@ -390,26 +542,6 @@
                           "type": "string",
                           "description": "startDate"
                         },
-                        "originalStartDate": {
-                          "type": "string",
-                          "description": "originalStartDate"
-                        },
-                        "probationPassedDate": {
-                          "type": "string",
-                          "description": "probationPassedDate"
-                        },
-                        "apprenticeStartDate": {
-                          "type": "string",
-                          "description": "apprenticeStartDate"
-                        },
-                        "leaveDate": {
-                          "type": "string",
-                          "description": "leaveDate"
-                        },
-                        "terminationReason": {
-                          "type": "string",
-                          "description": "terminationReason"
-                        },
                         "jobTitle": {
                           "type": "string",
                           "description": "jobTitle"
@@ -422,41 +554,13 @@
                           "type": "string",
                           "description": "grade"
                         },
-                        "legalEmployerCompany": {
-                          "type": "string",
-                          "description": "legalEmployerCompany"
-                        },
                         "department": {
                           "type": "string",
                           "description": "department"
                         },
-                        "division": {
-                          "type": "string",
-                          "description": "division"
-                        },
-                        "businessUnit": {
-                          "type": "string",
-                          "description": "businessUnit"
-                        },
                         "location": {
                           "type": "string",
                           "description": "location"
-                        },
-                        "countryOfWork": {
-                          "type": "string",
-                          "description": "countryOfWork"
-                        },
-                        "globalTransferDate": {
-                          "type": "string",
-                          "description": "globalTransferDate"
-                        },
-                        "costCentre": {
-                          "type": "string",
-                          "description": "costCentre"
-                        },
-                        "workPostCode": {
-                          "type": "string",
-                          "description": "workPostCode"
                         },
                         "workingHours": {
                           "type": "object",
@@ -494,24 +598,6 @@
                           },
                           "description": "workingHours"
                         },
-                        "contractDetails": {
-                          "type": "object",
-                          "properties": {
-                            "startDate": {
-                              "type": "string",
-                              "description": "startDate"
-                            },
-                            "endDate": {
-                              "type": "string",
-                              "description": "endDate"
-                            },
-                            "type": {
-                              "type": "string",
-                              "description": "type"
-                            }
-                          },
-                          "description": "contractDetails"
-                        },
                         "salaryDetails": {
                           "type": "object",
                           "properties": {
@@ -541,36 +627,23 @@
                           },
                           "description": "salaryDetails"
                         },
-                        "funding": {
+                        "contractDetails": {
                           "type": "object",
                           "properties": {
-                            "flexFund": {
-                              "type": "integer",
-                              "format": "int32",
-                              "description": "flexFund"
-                            },
-                            "fundingLevel1": {
+                            "startDate": {
                               "type": "string",
-                              "description": "fundingLevel1"
+                              "description": "startDate"
                             },
-                            "fundingLevel2": {
+                            "endDate": {
                               "type": "string",
-                              "description": "fundingLevel2"
+                              "description": "endDate"
                             },
-                            "fundingLevel3": {
+                            "type": {
                               "type": "string",
-                              "description": "fundingLevel3"
-                            },
-                            "fundingLevel4": {
-                              "type": "string",
-                              "description": "fundingLevel4"
-                            },
-                            "fundingLevel5": {
-                              "type": "string",
-                              "description": "fundingLevel5"
+                              "description": "type"
                             }
                           },
-                          "description": "funding"
+                          "description": "contractDetails"
                         }
                       },
                       "description": "employment"
@@ -581,18 +654,6 @@
                         "nationalIdentityNumber1": {
                           "type": "string",
                           "description": "nationalIdentityNumber1"
-                        },
-                        "nationalIdentityNumber2": {
-                          "type": "string",
-                          "description": "nationalIdentityNumber2"
-                        },
-                        "nationalIdentityNumber3": {
-                          "type": "string",
-                          "description": "nationalIdentityNumber3"
-                        },
-                        "nationalIdentityCountry": {
-                          "type": "string",
-                          "description": "nationalIdentityCountry"
                         }
                       },
                       "description": "nationalIdentity"
@@ -607,7 +668,7 @@
               }
             }
           },
-          "default": {
+          "202": {
             "description": "default",
             "schema": {
               "type": "object",
@@ -657,10 +718,6 @@
                         "line3": {
                           "type": "string",
                           "description": "line3"
-                        },
-                        "line4": {
-                          "type": "string",
-                          "description": "line4"
                         },
                         "line5": {
                           "type": "string",
@@ -716,26 +773,6 @@
                           "type": "string",
                           "description": "startDate"
                         },
-                        "originalStartDate": {
-                          "type": "string",
-                          "description": "originalStartDate"
-                        },
-                        "probationPassedDate": {
-                          "type": "string",
-                          "description": "probationPassedDate"
-                        },
-                        "apprenticeStartDate": {
-                          "type": "string",
-                          "description": "apprenticeStartDate"
-                        },
-                        "leaveDate": {
-                          "type": "string",
-                          "description": "leaveDate"
-                        },
-                        "terminationReason": {
-                          "type": "string",
-                          "description": "terminationReason"
-                        },
                         "jobTitle": {
                           "type": "string",
                           "description": "jobTitle"
@@ -748,41 +785,13 @@
                           "type": "string",
                           "description": "grade"
                         },
-                        "legalEmployerCompany": {
-                          "type": "string",
-                          "description": "legalEmployerCompany"
-                        },
                         "department": {
                           "type": "string",
                           "description": "department"
                         },
-                        "division": {
-                          "type": "string",
-                          "description": "division"
-                        },
-                        "businessUnit": {
-                          "type": "string",
-                          "description": "businessUnit"
-                        },
                         "location": {
                           "type": "string",
                           "description": "location"
-                        },
-                        "countryOfWork": {
-                          "type": "string",
-                          "description": "countryOfWork"
-                        },
-                        "globalTransferDate": {
-                          "type": "string",
-                          "description": "globalTransferDate"
-                        },
-                        "costCentre": {
-                          "type": "string",
-                          "description": "costCentre"
-                        },
-                        "workPostCode": {
-                          "type": "string",
-                          "description": "workPostCode"
                         },
                         "workingHours": {
                           "type": "object",
@@ -820,24 +829,6 @@
                           },
                           "description": "workingHours"
                         },
-                        "contractDetails": {
-                          "type": "object",
-                          "properties": {
-                            "startDate": {
-                              "type": "string",
-                              "description": "startDate"
-                            },
-                            "endDate": {
-                              "type": "string",
-                              "description": "endDate"
-                            },
-                            "type": {
-                              "type": "string",
-                              "description": "type"
-                            }
-                          },
-                          "description": "contractDetails"
-                        },
                         "salaryDetails": {
                           "type": "object",
                           "properties": {
@@ -867,36 +858,23 @@
                           },
                           "description": "salaryDetails"
                         },
-                        "funding": {
+                        "contractDetails": {
                           "type": "object",
                           "properties": {
-                            "flexFund": {
-                              "type": "integer",
-                              "format": "int32",
-                              "description": "flexFund"
-                            },
-                            "fundingLevel1": {
+                            "startDate": {
                               "type": "string",
-                              "description": "fundingLevel1"
+                              "description": "startDate"
                             },
-                            "fundingLevel2": {
+                            "endDate": {
                               "type": "string",
-                              "description": "fundingLevel2"
+                              "description": "endDate"
                             },
-                            "fundingLevel3": {
+                            "type": {
                               "type": "string",
-                              "description": "fundingLevel3"
-                            },
-                            "fundingLevel4": {
-                              "type": "string",
-                              "description": "fundingLevel4"
-                            },
-                            "fundingLevel5": {
-                              "type": "string",
-                              "description": "fundingLevel5"
+                              "description": "type"
                             }
                           },
-                          "description": "funding"
+                          "description": "contractDetails"
                         }
                       },
                       "description": "employment"
@@ -907,24 +885,250 @@
                         "nationalIdentityNumber1": {
                           "type": "string",
                           "description": "nationalIdentityNumber1"
-                        },
-                        "nationalIdentityNumber2": {
-                          "type": "string",
-                          "description": "nationalIdentityNumber2"
-                        },
-                        "nationalIdentityNumber3": {
-                          "type": "string",
-                          "description": "nationalIdentityNumber3"
-                        },
-                        "nationalIdentityCountry": {
-                          "type": "string",
-                          "description": "nationalIdentityCountry"
                         }
                       },
                       "description": "nationalIdentity"
                     }
                   },
                   "description": "data"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "pointer": {
+                            "type": "string",
+                            "description": "pointer"
+                          },
+                          "code": {
+                            "type": "string",
+                            "description": "code"
+                          },
+                          "message": {
+                            "type": "string",
+                            "description": "message"
+                          }
+                        }
+                      },
+                      "description": "details"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "pointer": {
+                            "type": "string",
+                            "description": "pointer"
+                          },
+                          "code": {
+                            "type": "string",
+                            "description": "code"
+                          },
+                          "message": {
+                            "type": "string",
+                            "description": "message"
+                          }
+                        }
+                      },
+                      "description": "details"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
                 },
                 "timestamp": {
                   "type": "string",
@@ -939,7 +1143,7 @@
     "/users/{user-id}": {
       "get": {
         "summary": "Get Existing user",
-        "description": "Get Existing user",
+        "description": "Get created user at Benifex platform",
         "operationId": "GetExistingUser",
         "parameters": [
           {
@@ -947,7 +1151,9 @@
             "default": "1213620a-292c-430c-a06a-7215fff279a3",
             "in": "path",
             "type": "string",
-            "required": true
+            "required": true,
+            "x-ms-summary": "Unique ID of the user",
+            "description": "Specific ID of the user you want to get information about."
           },
           {
             "name": "accept",
@@ -955,15 +1161,13 @@
             "required": true,
             "type": "string",
             "default": "application/json",
-            "description": "accept"
+            "description": "Defines the media type expected in the response, usually set to application/json to receive JSON-formatted data",
+            "x-ms-visibility": "internal",
+            "x-ms-summary": "Response format"
           }
         ],
         "responses": {
           "200": {
-            "description": "default",
-            "schema": {}
-          },
-          "default": {
             "description": "default",
             "schema": {
               "type": "object",
@@ -987,6 +1191,48 @@
                       "type": "string",
                       "description": "dateOfBirth"
                     },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    },
+                    "preferredName": {
+                      "type": "string",
+                      "description": "preferredName"
+                    },
+                    "localName": {
+                      "type": "string",
+                      "description": "localName"
+                    },
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "line1": {
+                          "type": "string",
+                          "description": "line1"
+                        },
+                        "line2": {
+                          "type": "string",
+                          "description": "line2"
+                        },
+                        "line3": {
+                          "type": "string",
+                          "description": "line3"
+                        },
+                        "line5": {
+                          "type": "string",
+                          "description": "line5"
+                        },
+                        "postcodeZipCode": {
+                          "type": "string",
+                          "description": "postcodeZipCode"
+                        },
+                        "country": {
+                          "type": "string",
+                          "description": "country"
+                        }
+                      },
+                      "description": "address"
+                    },
                     "emailAddress": {
                       "type": "string",
                       "description": "emailAddress"
@@ -995,9 +1241,21 @@
                       "type": "string",
                       "description": "gender"
                     },
+                    "nationality": {
+                      "type": "string",
+                      "description": "nationality"
+                    },
+                    "language": {
+                      "type": "string",
+                      "description": "language"
+                    },
                     "maritalStatus": {
                       "type": "string",
                       "description": "maritalStatus"
+                    },
+                    "effectiveDateOfMaritalStatus": {
+                      "type": "string",
+                      "description": "effectiveDateOfMaritalStatus"
                     },
                     "employment": {
                       "type": "object",
@@ -1005,6 +1263,10 @@
                         "employeeId": {
                           "type": "string",
                           "description": "employeeId"
+                        },
+                        "additionalEmployeeId": {
+                          "type": "string",
+                          "description": "additionalEmployeeId"
                         },
                         "startDate": {
                           "type": "string",
@@ -1014,6 +1276,10 @@
                           "type": "string",
                           "description": "jobTitle"
                         },
+                        "employmentStatus": {
+                          "type": "string",
+                          "description": "employmentStatus"
+                        },
                         "grade": {
                           "type": "string",
                           "description": "grade"
@@ -1022,15 +1288,45 @@
                           "type": "string",
                           "description": "department"
                         },
-                        "contractDetails": {
+                        "location": {
+                          "type": "string",
+                          "description": "location"
+                        },
+                        "workingHours": {
                           "type": "object",
                           "properties": {
-                            "type": {
-                              "type": "string",
-                              "description": "type"
+                            "contractedHours": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "contractedHours"
+                            },
+                            "fullTimeEquivalentHours": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "fullTimeEquivalentHours"
+                            },
+                            "daysPerWeek": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "daysPerWeek"
+                            },
+                            "fullTimeEquivalentFraction": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "fullTimeEquivalentFraction"
+                            },
+                            "holidayDays": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "holidayDays"
+                            },
+                            "holidayHours": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "holidayHours"
                             }
                           },
-                          "description": "contractDetails"
+                          "description": "workingHours"
                         },
                         "salaryDetails": {
                           "type": "object",
@@ -1047,15 +1343,209 @@
                             "salaryEffectiveDate": {
                               "type": "string",
                               "description": "salaryEffectiveDate"
+                            },
+                            "pensionableSalary": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "pensionableSalary"
+                            },
+                            "payPeriods": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "payPeriods"
                             }
                           },
                           "description": "salaryDetails"
+                        },
+                        "contractDetails": {
+                          "type": "object",
+                          "properties": {
+                            "startDate": {
+                              "type": "string",
+                              "description": "startDate"
+                            },
+                            "endDate": {
+                              "type": "string",
+                              "description": "endDate"
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "type"
+                            }
+                          },
+                          "description": "contractDetails"
                         }
                       },
                       "description": "employment"
+                    },
+                    "nationalIdentity": {
+                      "type": "object",
+                      "properties": {
+                        "nationalIdentityNumber1": {
+                          "type": "string",
+                          "description": "nationalIdentityNumber1"
+                        }
+                      },
+                      "description": "nationalIdentity"
                     }
                   },
                   "description": "data"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
                 },
                 "timestamp": {
                   "type": "string",
@@ -1068,7 +1558,7 @@
       },
       "patch": {
         "summary": "update existing user",
-        "description": "update existing user",
+        "description": "Update existing user at Benifex platform",
         "operationId": "UpdateExistingUser",
         "parameters": [
           {
@@ -1076,7 +1566,9 @@
             "default": "1213620a-292c-430c-a06a-7215fff279a3",
             "in": "path",
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Specific ID of the user you want to get information about.",
+            "x-ms-summary": "Unique ID of the user"
           },
           {
             "name": "accept",
@@ -1084,7 +1576,8 @@
             "required": true,
             "type": "string",
             "default": "application/json",
-            "description": "accept"
+            "description": "Defines the media type expected in the response, usually set to application/json to receive JSON-formatted data",
+            "x-ms-summary": "Response format"
           },
           {
             "name": "content-type",
@@ -1092,7 +1585,8 @@
             "required": true,
             "type": "string",
             "default": "application/json",
-            "description": "content-type"
+            "description": "Indicates the media type of the body being sent in the request.",
+            "x-ms-summary": "Request payload format"
           },
           {
             "name": "body",
@@ -1128,10 +1622,6 @@
         "responses": {
           "200": {
             "description": "default",
-            "schema": {}
-          },
-          "default": {
-            "description": "default",
             "schema": {
               "type": "object",
               "properties": {
@@ -1151,38 +1641,242 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "pointer": {
+                            "type": "string",
+                            "description": "pointer"
+                          },
+                          "code": {
+                            "type": "string",
+                            "description": "code"
+                          },
+                          "message": {
+                            "type": "string",
+                            "description": "message"
+                          }
+                        }
+                      },
+                      "description": "details"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/v2/users/{user-id}/benefits/details": {
+    "/v2/users/{user-id}/benefits/details": {},
+    "/v2/users/{user-id}/benefits/summary": {},
+    "/v2/users/{user-id}/benefits/{benefit-key}/summary": {},
+    "/oauth2/default/v1/token": {},
+    "/users/{user-id}/benefits/details": {
       "get": {
         "summary": "Get detailed available and eligible-to-add benefits of user.",
-        "description": "Get detailed available and eligible-to-add benefits of user.",
+        "description": "Returns details of current and eligible to add benefits for the requested user.",
         "operationId": "GetDetailedAvailableAndEligible-to-addBenefitsOfUser.",
         "parameters": [
           {
             "name": "user-id",
-            "default": "bb65d42f-d454-4156-ad69-3e0e42223e57",
             "in": "path",
+            "required": true,
             "type": "string",
-            "required": true
+            "description": "Specific ID of the user you want to get information about.",
+            "x-ms-summary": "Unique ID of the user"
           },
           {
             "name": "accept",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
-            "default": "application/json",
-            "description": "accept"
+            "description": "Defines the media type expected in the response, usually set to application/json to receive JSON-formatted data",
+            "x-ms-summary": "Response format"
           }
         ],
         "responses": {
           "200": {
-            "description": "default",
-            "schema": {}
-          },
-          "default": {
             "description": "default",
             "schema": {
               "type": "object",
@@ -1206,6 +1900,10 @@
                           "editableUntil": {
                             "type": "string",
                             "description": "editableUntil"
+                          },
+                          "changeDate": {
+                            "type": "string",
+                            "description": "changeDate"
                           },
                           "benefitCost": {
                             "type": "object",
@@ -1248,8 +1946,8 @@
                                 "description": "annual"
                               },
                               "monthly": {
-                                "type": "integer",
-                                "format": "int32",
+                                "type": "number",
+                                "format": "float",
                                 "description": "monthly"
                               }
                             },
@@ -1276,6 +1974,10 @@
                             "items": {
                               "type": "object",
                               "properties": {
+                                "title": {
+                                  "type": "string",
+                                  "description": "title"
+                                },
                                 "type": {
                                   "type": "string",
                                   "description": "type"
@@ -1288,10 +1990,6 @@
                                   "type": "array",
                                   "items": {},
                                   "description": "sections"
-                                },
-                                "title": {
-                                  "type": "string",
-                                  "description": "title"
                                 }
                               }
                             },
@@ -1365,6 +2063,10 @@
                             "items": {
                               "type": "object",
                               "properties": {
+                                "title": {
+                                  "type": "string",
+                                  "description": "title"
+                                },
                                 "type": {
                                   "type": "string",
                                   "description": "type"
@@ -1377,10 +2079,6 @@
                                   "type": "array",
                                   "items": {},
                                   "description": "sections"
-                                },
-                                "title": {
-                                  "type": "string",
-                                  "description": "title"
                                 }
                               }
                             },
@@ -1425,38 +2123,192 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/v2/users/{user-id}/benefits/summary": {
+    "/users/{user-id}/benefits/summary": {
       "get": {
         "summary": "Get summarized available and eligible-to-add benefits of user.",
-        "description": "Get summarized available and eligible-to-add benefits of user.",
+        "description": "Returns current and eligible to add benefits for the requested user.",
         "operationId": "GetSummarizedAvailableAndEligible-to-addBenefitsOfUser.",
         "parameters": [
           {
             "name": "user-id",
-            "default": "bb65d42f-d454-4156-ad69-3e0e42223e57",
             "in": "path",
+            "required": true,
             "type": "string",
-            "required": true
+            "description": "Specific ID of the user you want to get information about.",
+            "x-ms-summary": "Unique ID of the user"
           },
           {
             "name": "accept",
             "in": "header",
-            "required": true,
+            "required": false,
             "type": "string",
             "default": "application/json",
-            "description": "accept"
+            "description": "Defines the media type expected in the response, usually set to application/json to receive JSON-formatted data",
+            "x-ms-summary": "Response format"
           }
         ],
         "responses": {
           "200": {
-            "description": "default",
-            "schema": {}
-          },
-          "default": {
             "description": "default",
             "schema": {
               "type": "object",
@@ -1505,6 +2357,10 @@
                           "benefitLink": {
                             "type": "string",
                             "description": "benefitLink"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "status"
                           }
                         }
                       },
@@ -1519,45 +2375,191 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/v2/users/{user-id}/benefits/{benefit-key}/summary": {
+    "/users/{user-id}/benefits/{benefit-key}/summary": {
       "get": {
         "summary": "Get user benefit information.",
-        "description": "Get user benefit information.",
+        "description": "Returns details of single benefit of the requested user.",
         "operationId": "GetUserBenefitInformation.",
         "parameters": [
           {
-            "name": "benefit-key",
-            "default": "_LifeInsurance",
-            "in": "path",
-            "type": "string",
-            "required": true
-          },
-          {
             "name": "user-id",
-            "default": "bb65d42f-d454-4156-ad69-3e0e42223e57",
             "in": "path",
-            "type": "string",
-            "required": true
-          },
-          {
-            "name": "accept",
-            "in": "header",
             "required": true,
             "type": "string",
-            "default": "application/json",
-            "description": "accept"
+            "description": "Specific ID of the user you want to get information about.",
+            "x-ms-summary": "Unique ID of the user"
+          },
+          {
+            "name": "benefit-key",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Unique benefit identifier",
+            "description": "Specific key used to identify which benefit information you want to retrieve for the given user."
           }
         ],
         "responses": {
           "200": {
-            "description": "default",
-            "schema": {}
-          },
-          "default": {
             "description": "default",
             "schema": {
               "type": "object",
@@ -1577,6 +2579,10 @@
                       "type": "string",
                       "description": "editableUntil"
                     },
+                    "changeDate": {
+                      "type": "string",
+                      "description": "changeDate"
+                    },
                     "benefitCost": {
                       "type": "object",
                       "properties": {
@@ -1586,8 +2592,8 @@
                           "description": "annual"
                         },
                         "monthly": {
-                          "type": "integer",
-                          "format": "int32",
+                          "type": "number",
+                          "format": "float",
                           "description": "monthly"
                         }
                       },
@@ -1618,8 +2624,8 @@
                           "description": "annual"
                         },
                         "monthly": {
-                          "type": "integer",
-                          "format": "int32",
+                          "type": "number",
+                          "format": "float",
                           "description": "monthly"
                         }
                       },
@@ -1646,6 +2652,10 @@
                       "items": {
                         "type": "object",
                         "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "title"
+                          },
                           "type": {
                             "type": "string",
                             "description": "type"
@@ -1658,10 +2668,6 @@
                             "type": "array",
                             "items": {},
                             "description": "sections"
-                          },
-                          "title": {
-                            "type": "string",
-                            "description": "title"
                           }
                         }
                       },
@@ -1669,19 +2675,7 @@
                     },
                     "faqs": {
                       "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "question": {
-                            "type": "string",
-                            "description": "question"
-                          },
-                          "answer": {
-                            "type": "string",
-                            "description": "answer"
-                          }
-                        }
-                      },
+                      "items": {},
                       "description": "faqs"
                     },
                     "needToKnow": {
@@ -1714,11 +2708,166 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "type"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "title"
+                    }
+                  },
+                  "description": "error"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "timestamp"
+                }
+              }
+            }
           }
         }
       }
-    },
-    "/oauth2/default/v1/token": {}
+    }
   },
   "definitions": {},
   "parameters": {},

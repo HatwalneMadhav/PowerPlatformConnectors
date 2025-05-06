@@ -1,54 +1,37 @@
-# Benifex
-The Benifex connector enables seamless data integration between Benifix and other HR or payroll systems, ensuring accurate and up-to-date benefits information across platforms.
+# Benefex
+The Benefex connector enables seamless data integration between Benifix and other HR or payroll systems, ensuring accurate and up-to-date benefits information across platforms.
 
-## Publisher: HR Copilot
+## Publisher: Benefex
 
 ## Prerequisites
-> To access the Benifex connector you need client_id and client_secret.
+> To access our API, you will need to obtain the necessary credentials that should be delivered by connect api platform
+team in individual manner.
+
+Please contact us at: platform@benefex.co
 
 ## Supported Operations
 
-- **`GetExistingUsers`**
-- *Inputs:* `Body` `employeeIds` `page` `size`
-- *HTTP Verb:* `GET`
-- *Description:* Get created users at Benifex platform by employee IDs with pagination support.
+- **`Create New User:`** Create a new user on the Benefex platform.
 
-- **`CreateUser`**
-- *Inputs:* `Body` 
-- *HTTP Verb:* `POST`
-- *Description:* Create a new user on the Benifex platform.
+- **`Get Existing Users:`** Get created users at Benefex platform by employee IDs with pagination support.
 
-- **`GetExistingUser`**
-- *Inputs:* `user-id` 
-- *HTTP Verb:* `GET`
-- *Description:* Get created user at Benifex platform.
+- **`Update Existing User:`** Update existing user at Benefex platform.
 
-- **`UpdateExistingUser`**
-- *Inputs:* `user-id` `Body`
-- *HTTP Verb:* `PATCH`
-- *Description:* Update existing user at Benifex platform.
+- **`Get Existing User:`** Get created user at Benefex platform.
 
-- **`GetDetailedAvailableAndEligible-to-addBenefitsOfUser`**
-- *Inputs:* `user-id` 
-- *HTTP Verb:* `GET`
-- *Description:* Returns details of current and eligible to add benefits for the requested user.
+- **`Get summarized available and eligible-to-add benefits of user:`** Returns current and eligible to add benefits for the requested user.
 
-- **`GetSummarizedAvailableAndEligible-to-addBenefitsOfUser`**
-- *Inputs:* `user-id` 
-- *HTTP Verb:* `GET`
-- *Description:* Returns current and eligible to add benefits for the requested user.
+- **`Get detailed available and eligible-to-add benefits of user:`** Returns details of current and eligible to add benefits for the requested user.
 
-- **`GetUserBenefitInformation`**
-- *Inputs:* `user-id` `benefit-key`
-- *HTTP Verb:* `GET`
-- *Description:* Returns details of single benefit of the requested user.
+- **`Get user benefit information:`** Returns details of single benefit of the requested user.
+
+More details on the supported operations can be found here "https://docs.onehub.global/bfx-playground/reference/connect_createuser"
 
 ## Obtaining Credentials
 Make an Api call to the endpoint "https://hub.onehub.global/oauth2/default/v1/token" with an API testing Tool with the query parameters "client_id", "client_secret", "grant_type".
 
 ## Known Issues and Limitations
-"client_id" and "client_secret" of benifex platform are manadotory to estabalish connection with connectors.
+"client_id" and "client_secret" of Benefex platform are manadotory to estabalish connection with connectors.
 
 ## API Documentation
 Refer to "https://docs.onehub.global/bfx-playground/" 
-
